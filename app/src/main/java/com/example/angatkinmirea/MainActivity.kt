@@ -20,8 +20,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             AngatkinMIREATheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    Hello(
+                        name = "Александр",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -31,17 +31,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Hello(name: String?, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = if (name != null) "Здравствуйте, $name!" else "Имя не задано",
         modifier = modifier
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun HelloPreview() {
     AngatkinMIREATheme {
-        Greeting("Android")
+        Hello("Александр")
     }
 }
