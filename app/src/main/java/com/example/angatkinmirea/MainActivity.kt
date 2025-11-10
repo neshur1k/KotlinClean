@@ -26,12 +26,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -60,7 +65,8 @@ class MainActivity : ComponentActivity() {
                     // CircleCenter()
                     // FirstColumnText()
                     // SecondColumnText()
-                    RowText()
+                    // RowText()
+                    WaterTracker()
                 }
             }
         }
@@ -319,6 +325,41 @@ fun RowText() {
             Image(
                 painter = painterResource(id = R.drawable.circle),
                 contentDescription = "red circle"
+            )
+        }
+    }
+}
+
+@Composable
+fun WaterTracker() {
+    var waterCount by remember { mutableStateOf(100) }
+    var dayCount by remember { mutableStateOf(0) }
+    val primaryColor = Color(0xFF2196F3)
+    val secondaryColor = Color(0xFF03A9F4)
+    val buttonTextColor = Color(0xFFFFFFFF)
+    Box (modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Трекер воды", fontSize = 32.sp,
+                fontWeight = FontWeight.Bold, color = primaryColor)
+            Spacer(modifier = Modifier.height(48.dp))
+            Text(text = "$waterCount мл", fontSize = 48.sp,
+                fontWeight = FontWeight.Bold, color = secondaryColor)
+            Spacer(modifier = Modifier.height(48.dp))
+            Button(onClick = { waterCount += 250 }, shape = RectangleShape) {
+                Text(text = "+250 мл", fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold, color = buttonTextColor)
+            }
+            Spacer(modifier = Modifier.height(48.dp))
+            Button(onClick = {
+                if (waterCount >= 1500) dayCount++ else dayCount = 0
+                waterCount = 0
+            }, shape = RectangleShape) {
+                Text(text = "Завершить день", fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold, color = buttonTextColor)
+            }
+            Spacer(modifier = Modifier.height(48.dp))
+            Text(text = "Дней подряд: $dayCount", fontSize = 18.sp,
+                fontWeight = FontWeight.Bold, color = secondaryColor
             )
         }
     }
