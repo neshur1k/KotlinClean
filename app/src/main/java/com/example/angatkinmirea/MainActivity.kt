@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +27,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -45,12 +51,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             AngatkinMIREATheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Hello(
-                        name = "Александр",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                    StyledButton()
-                    GrayContainer()
+                    Hello(name = "Александр", modifier = Modifier.padding(innerPadding))
+                    // StyledButton()
+                    // GrayContainer()
+                    // CircleTopRight()
+                    CircleCenter()
                 }
             }
         }
@@ -175,5 +180,40 @@ fun GrayContainer() {
                 fontSize = 14.sp
             )
         }
+    }
+}
+
+@Composable
+fun CircleTopRight() {
+    Box(
+        modifier = Modifier
+            .size(width = 240.dp, height = 120.dp)
+            .background(Color.Black)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.circle),
+            contentDescription = "red circle",
+            modifier = Modifier.align(Alignment.TopEnd)
+        )
+    }
+}
+
+@Composable
+fun CircleCenter() {
+    Box(
+        modifier = Modifier
+            .size(width = 240.dp, height = 120.dp)
+            .background(Color.Blue)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.circle),
+            contentDescription = "purple circle",
+            modifier = Modifier
+                .fillMaxSize()
+                .scale(scaleX = 1f, scaleY = 0.8f)
+                .align(Alignment.Center),
+            colorFilter = ColorFilter.tint(Color(0xFF9C27B0)),
+            contentScale = ContentScale.FillBounds
+        )
     }
 }
