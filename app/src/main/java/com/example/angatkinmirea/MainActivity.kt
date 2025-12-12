@@ -53,9 +53,9 @@ class MainActivity : ComponentActivity() {
             AngatkinMIREATheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Hello(name = "Александр", modifier = Modifier.padding(innerPadding))
-                    // ItemListScreen(itemsList)
+                    ItemListScreen(itemsList)
                     // CounterScreen()
-                    AdaptiveScreen(widthClass)
+                    // AdaptiveScreen(widthClass)
                     /*
                     val navController = rememberNavController()
                     NavHost (navController = navController, startDestination = "home") {
@@ -202,7 +202,8 @@ fun ItemListScreen(items: List<ListItem>) {
 fun ItemCard(item: ListItem) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(4.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
             Image(
