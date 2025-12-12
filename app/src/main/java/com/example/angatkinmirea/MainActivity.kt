@@ -24,6 +24,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,21 +42,27 @@ import com.example.angatkinmirea.ui.theme.AngatkinMIREATheme
 class MainActivity : ComponentActivity() {
     private val TAG = "LIFECYCLE"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
         enableEdgeToEdge()
         setContent {
+            val windowSize = calculateWindowSizeClass(this)
+            val widthClass = windowSize.widthSizeClass
             AngatkinMIREATheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Hello(name = "Александр", modifier = Modifier.padding(innerPadding))
                     // ItemListScreen(itemsList)
                     // CounterScreen()
+                    AdaptiveScreen(widthClass)
+                    /*
                     val navController = rememberNavController()
                     NavHost (navController = navController, startDestination = "home") {
                         composable("home") { HomeScreen(navController) }
                         composable("details") { DetailsScreen() }
                     }
+                     */
                 }
             }
         }
@@ -83,6 +91,30 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy")
+    }
+}
+
+@Composable
+fun AdaptiveScreen(widthClass: WindowWidthSizeClass) {
+    when (widthClass) {
+        WindowWidthSizeClass.Compact -> {
+            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                Text("Compact layout", fontSize = 22.sp)
+                Text("Одна колонка")
+            }
+        }
+
+        WindowWidthSizeClass.Medium,
+        WindowWidthSizeClass.Expanded -> {
+            Row(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text("Список", fontSize = 22.sp)
+                }
+                Column(modifier = Modifier.weight(1f)) {
+                    Text("Детали", fontSize = 22.sp)
+                }
+            }
+        }
     }
 }
 

@@ -33,6 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += "-opt-in=androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi"
     }
     buildFeatures {
         compose = true
@@ -65,6 +66,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     implementation("androidx.activity:activity-ktx:1.7.2")
-
     implementation("androidx.navigation:navigation-compose:2.8.0")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
 }
