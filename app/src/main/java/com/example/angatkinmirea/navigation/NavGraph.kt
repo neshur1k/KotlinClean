@@ -3,6 +3,7 @@ package com.example.angatkinmirea.navigation
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,14 +21,21 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun NavGraph(startDestination: String = Screen.List.route, context: Context) {
-    val navController = rememberNavController()
-    val viewModel: TodoViewModel = viewModel(factory = TodoViewModel.TodoViewModelFactory(context))
+fun NavGraph(
+    startDestination: String = Screen.List.route,
+    context: Context,
+    navController: NavHostController? = null,
+    viewModel: TodoViewModel? = null
+) {
+    val nav = navController ?: rememberNavController()
+    val vm = viewModel ?: androidx.lifecycle.viewmodel.compose.viewModel(
+        factory = TodoViewModel.TodoViewModelFactory(context)
+    )
 
-    NavHost(navController = navController, startDestination = startDestination) {
+    NavHost(navController = nav, startDestination = startDestination) {
         composable(Screen.List.route) {
-            TodoListScreen(viewModel = viewModel, onOpenDetail = { id ->
-                navController.navigate(Screen.Detail.createRoute(id))
+            TodoListScreen(viewModel = vm, onOpenDetail = { id ->
+                nav.navigate(Screen.Detail.createRoute(id))
             })
         }
         composable(
@@ -35,9 +43,8 @@ fun NavGraph(startDestination: String = Screen.List.route, context: Context) {
             arguments = listOf(navArgument("todoId") { type = NavType.IntType })
         ) { backStackEntry ->
             val todoId = backStackEntry.arguments?.getInt("todoId") ?: -1
-            TodoDetailScreen(todoId = todoId, viewModel = viewModel, onBack = {
-                navController.popBackStack()
-            })
+            TodoDetailScreen(todoId = todoId, viewModel = vm, onBack = { nav.popBackStack() })
         }
     }
 }
+

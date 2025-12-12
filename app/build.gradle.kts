@@ -71,5 +71,4 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
     implementation("com.google.code.gson:gson:2.10.1")
-
 }
