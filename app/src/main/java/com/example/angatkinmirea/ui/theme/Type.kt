@@ -17,38 +17,21 @@ val provider = GoogleFont.Provider(
     certificates = R.array.com_google_android_gms_fonts_certs
 )
 
-val bodyFontFamily = FontFamily(
-    Font(
-        googleFont = GoogleFont("Orbit"),
-        fontProvider = provider,
-    )
-)
-
-val displayFontFamily = FontFamily(
-    Font(
-        googleFont = GoogleFont("Luckiest Guy"),
-        fontProvider = provider,
-    )
-)
-
 // Default Material 3 typography values
 val baseline = Typography()
 
 val AppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_bold)),
-        fontWeight = FontWeight.Bold,
-        fontSize = 57.sp
+        fontWeight = FontWeight.Bold, fontSize = 24.sp
     ),
     headlineMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_medium)),
-        fontWeight = FontWeight.Medium,
-        fontSize = 28.sp
+        fontWeight = FontWeight.Medium, fontSize = 14.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_regular)),
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontWeight = FontWeight.Normal, fontSize = 8.sp
     )
 )
 
