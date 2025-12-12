@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.angatkinmirea.ui.theme.AngatkinMIREATheme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +49,12 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Hello(name = "Александр", modifier = Modifier.padding(innerPadding))
                     // ItemListScreen(itemsList)
-                    CounterScreen()
+                    // CounterScreen()
+                    val navController = rememberNavController()
+                    NavHost (navController = navController, startDestination = "home") {
+                        composable("home") { HomeScreen(navController) }
+                        composable("details") { DetailsScreen() }
+                    }
                 }
             }
         }
@@ -73,6 +83,33 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy")
+    }
+}
+
+@Composable
+fun HomeScreen(navController: NavController) {
+    Column(
+        modifier = Modifier.padding(24.dp)
+    ) {
+        Text("Home Screen", fontSize = 22.sp)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = {
+            navController.navigate("details")
+        }) {
+            Text("Перейти на Details")
+        }
+    }
+}
+
+@Composable
+fun DetailsScreen() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("Экран Details", fontSize = 22.sp)
     }
 }
 
