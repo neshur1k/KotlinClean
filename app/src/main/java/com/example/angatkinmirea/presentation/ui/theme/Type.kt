@@ -1,4 +1,4 @@
-package com.example.angatkinmirea.ui.theme
+package com.example.angatkinmirea.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -23,15 +23,15 @@ val baseline = Typography()
 val AppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_bold)),
-        fontWeight = FontWeight.Bold, fontSize = 24.sp
+        fontWeight = FontWeight.Bold, fontSize = 48.sp
     ),
     headlineMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_medium)),
-        fontWeight = FontWeight.Medium, fontSize = 14.sp
+        fontWeight = FontWeight.Medium, fontSize = 28.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.sciencegothic_regular)),
-        fontWeight = FontWeight.Normal, fontSize = 8.sp
+        fontWeight = FontWeight.Normal, fontSize = 16.sp
     )
 )
 

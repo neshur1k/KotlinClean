@@ -1,4 +1,4 @@
-package com.example.angatkinmirea.ui.theme
+package com.example.angatkinmirea.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

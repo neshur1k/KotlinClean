@@ -1,4 +1,4 @@
-package com.example.angatkinmirea.ui.theme
+package com.example.angatkinmirea.presentation.ui.theme
 
 import com.example.compose.backgroundDark
 import com.example.compose.backgroundDarkHighContrast
