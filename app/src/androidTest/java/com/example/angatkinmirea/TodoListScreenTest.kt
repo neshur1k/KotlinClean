@@ -63,11 +63,15 @@ class TodoListScreenTest {
             TodoListScreen(viewModel = viewModel, onOpenDetail = {})
         }
 
-        composeTestRule.onNodeWithText("Задание 1").performClick()
+        composeTestRule.onNode(
+            hasClickAction() and hasParent(hasText("Задание 1"))
+        ).performClick()
+
         composeTestRule.runOnIdle {
             assert(todos[0].isCompleted)
         }
     }
+
 
     @Test
     fun navigationListToDetailAndBack() {

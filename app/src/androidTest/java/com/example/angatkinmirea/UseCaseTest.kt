@@ -4,8 +4,7 @@ import com.example.angatkinmirea.domain.repository.TodoRepository
 import com.example.angatkinmirea.domain.usecase.GetTodosUseCase
 import com.example.angatkinmirea.domain.usecase.ToggleTodoUseCase
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Test
 
 class UseCaseTest {
